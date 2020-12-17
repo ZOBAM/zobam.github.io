@@ -1,0 +1,66 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="style/materialize.css"  media="screen,projection"/>
+    <script src="js/jquery.min.js"></script>
+    <title>jQuery</title>
+</head>
+<body>
+    <script type="text/javascript" src="js/materialize.js"></script>
+    <script>
+        $(document).ready(function(){
+          $('body').append(
+              $('<nav>').append(
+                  $('<div>').addClass('nav-wrapper').append($('<a>').addClass('brand-logo').attr({href:"#"}).append($("<img>").attr({src:"media/images/logo.png"}))
+                    ).append(
+                        $("<ul>").attr({id:"nav-mobile", class:"right hide-on-med-and-down"})
+                            .append(
+                            $("<li>").append($("<a>").attr({href:"sass.html"}).text("Sass")))
+                            .append(
+                            $("<li>").append($("<a>").attr({href:"css.html"}).text("CSS")))
+                            .append(
+                            $("<li>").append( $("<a>").attr({href:"vue.html"}).text("Vue")))
+                                                
+                    )
+                )
+            );
+            $("body").append(
+                $("<div>").addClass("container").append(
+                    $("<div>").addClass("row").append(
+                        $("<div>").addClass("col s12").attr({id:"table-container"})
+                    )
+                )
+            )
+            $.get("https://api.exchangeratesapi.io/latest",{},function(response){
+                console.log(response);
+                let tableContainer = $("#table-container");
+                let table = $("<table>").addClass("centered striped");
+                table.append(
+                    $("<thead>").append(
+                        $("<tr>").append(
+                            $("<th>").text("S/N")).append(
+                            $("<th>").text("CURRENCY")
+                                ).append(
+                                $("<th>").text("RATES")
+                                )
+                            )
+                        );
+                //tableContainer.append(table);
+                //table body
+                let tableBody = $("<tbody>");
+                let sn = 1;
+                for(let index in response.rates){
+                    let value = response.rates[index];
+                    tableBody.append(
+                        $("<tr>").append(sn).append($("<td>").text(index)).append($("<td>").text(value)));
+                    sn++;
+                }
+                table.append(tableBody);
+                tableContainer.append(table);
+            });
+        })
+    </script>
+</body>
+</html>

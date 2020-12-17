@@ -1,0 +1,72 @@
+<!Doctype html>
+<html>
+    <head>
+        <title>Layout Practice</title>
+        <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="style/materialize.css"  media="screen,projection"/>
+
+        <link rel="stylesheet" href="style/style.css">
+    </head>
+    <body>
+        <p>I have the following properties:</p>
+        <ul>
+            <li id="elemID">Lands</li>
+            <li class="elemClass">Houses</li>
+            <li >Cars</li>
+            <li class="anotherClass">Bikes</li>
+        </ul>
+        <div class="animate"> Trying out animation</div>
+        <ol>
+            <li>Lands</li>
+            <li>Houses</li>
+            <li>Cars</li>
+            <li>Bikes</li>
+        </ol>
+        <div>
+            <p>
+                I have been thinking through the whole thing you told me this morning and I'm sad to let you know that I won't be able able to make it. My performance last week on the task and assignments given weren't so good and I was asked to repeat them coupled with the assignments of this week, all to be submitted on Saturday morning. As I face this strenuous training session, I don't want to create any impression that I am not fully committed to it because part of the terms is that I should be fully available always for the duration of the training without having other engagements with which I will give excuses or miss class.
+            </p>
+            <p>
+                Finally, I can't really wait to get to the point of even a little degree of financial ease so that I can really live the life I yearn to live, a live of constant service and work in His vineyard for the expansion of the Kingdom. I feel so bad whenever I have to write you messages like this but for now, it seems I have little or no choice. 
+
+                Please sir, don't forget to pray for me.
+            </p>
+        </div>
+        <canvas id="canvas" width="400" height="300"></canvas>
+        <table>
+            <tr>
+                <th>S/N</th>
+                <th>Name</th>
+                <th>Maths</th>
+                <th>English</th>
+                <th>Total</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Julian</td>
+                <td>60</td>
+                <td>80</td>
+                <td>140</td>
+            </tr>
+        </table>
+        <h1>I am a level one Heading</h1>
+        <script src="js/canvas.js"></script>
+        <script type="text/javascript" src="js/materialize.js"></script>
+        <script>
+            var liEl = document.querySelector('#elemID').style.backgroundColor = "rgb(255,100,100,0.5)";
+            var liEl1 = document.querySelector('.elemClass').style.backgroundColor = "rgb(100,100,255,0.5)";
+            var liEl2 = document.getElementsByTagName('li')[2].style.backgroundColor = "rgb(255,255,10,0.5)";
+            var liEl3 = document.getElementsByClassName('anotherClass')[0].style.backgroundColor = "purple";
+            document.getElementsByTagName('h1')[0].onclick = function(){
+                this.style.backgroundColor = "blue";
+                alert("You clicked a heading element");
+            }
+            /* document.getElementsByTagName('body')[0].onscroll = function(){
+                //this.style.backgroundColor = "blue";
+                alert();
+            } */
+        </script>
+    </body>
+</html>

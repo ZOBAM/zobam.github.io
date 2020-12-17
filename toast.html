@@ -1,0 +1,50 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materialize Toast</title>
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="style/materialize.css"  media="screen,projection"/>
+</head>
+<body>
+    <button onclick="getToast()">Display Toasts</button>
+    <script type="text/javascript" src="js/materialize.js"></script>
+    <script>
+          var msgs = ['I heard you were coming.', 'I was glad to have you around', 'Welcome to my world', 'You are always a blessing','God bless you'];
+          var bodyEl = document.getElementsByTagName('body')[0];
+          var ulEl = document.createElement('u');
+          
+          for(let i = 0; i<msgs.length; i++){
+              var liEl = document.createElement('li');
+              liEl.appendChild(document.createTextNode(msgs[i]))
+              ulEl.appendChild(liEl);
+          }
+          bodyEl.appendChild(ulEl);
+
+  function getToast(){
+      var index = 0;
+      var liElems = document.getElementsByTagName('li');
+      let myInterval = setInterval(function(){
+          M.toast({html: msgs[index]});
+          for(let i = 0; i<liElems.length; i++){
+                liElems[i].style.backgroundColor = 'white';
+                liElems[i].style.border = "0px solid white";
+            }
+          liElems[index].style.backgroundColor = "#ededed";
+          liElems[index].style.padding = "5px";
+          liElems[index].style.border = "3px solid #9999ff";
+          index++;
+          if(index == msgs.length-1){
+              for(let i = 0; i<liElems.length; i++){
+                  //alert('About to clear bg');
+                  liElems[i].style.border = '0px solid white';
+                  liElems[i].style.backgroundColor = 'white';
+              }
+              clearInterval('myInterval');
+          }
+      },5000);
+  }
+  
+    </script>
+</body>
+</html>

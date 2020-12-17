@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Contact Form</title>
+        <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="style/fontawesome/css/all.min.css">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <style>
+            body{
+                font-family: 'Hind Siliguri';
+                height: 100vh;
+                background-color: #000000;
+                overflow: hidden;
+                /* display: flex;
+                justify-content: center;
+                align-items: center; */
+            }
+            .header{
+                background-color: black;
+                background-image: url('media/images/hand_laptop.png');
+                background-size: cover;
+                height: 22vh;
+                text-align: center;
+                color: #fff;
+                padding-top: 3rem;
+            }
+            .header h3{
+                margin-bottom: 0px;
+            }
+            main{
+                width: 50%;
+                padding: 0vw;
+                margin: auto;
+                background-color: #fff;
+                border-radius: 8px;
+            }
+            label{
+                display: inline-block;
+                width: 6rem;
+                text-align: right;
+                margin-right: 8px;
+                font-weight: bold;
+                color: rgba(0, 0, 0, 0.445);
+            }
+            form div:nth-last-child(2) label{
+                padding-top: -20px;
+            }
+            div{
+                margin-top: 2rem;
+            }
+            input, textarea{
+                border: none;
+                outline: none;
+                border-bottom: 1px solid rgba(58, 56, 56, 0.233);
+                width: 30vw;
+            }
+            input:focus, textarea:focus{
+                border-bottom: 1px solid rgba(58, 56, 56, 0.863);
+                width: 30vw;
+            }
+            form{
+                border: 0px solid rgb(202, 197, 197);
+                width: 80%;
+                margin: auto;
+                margin-top: 2em;
+                padding-bottom: 5px;
+            }
+            form button{
+                display: block;
+                text-align: center;
+                background-color: green;
+                padding: 5px 8px;
+                margin: 15px auto;
+                border-radius: 50px;
+                border: none;
+                color: white;
+                height: 40px;
+                width: 120px;
+            }
+        </style>
+    </head>
+    <body>
+        <main>
+            <div class="header">
+                <h3>Contact Us</h3>
+                <span>
+                    Feel free to drop us a line below
+                </span>
+            </div>
+                <form>
+                    <div>
+                    <label>Full Name:</label>
+                    <input type ="text" placeholder="Enter full name">
+                    </div>
+                    <div>
+                      <label>Email:</label>
+                    <input type ="text" placeholder="Enter email address">
+                    </div>
+                    <div>
+                      <label>Phone:</label>
+                    <input type ="text" placeholder="Enter phone">
+                    </div>
+                    <div>
+                    <label>Message:</label>
+                    <textarea placeholder="Your comment" rows="5"></textarea>
+                    </div>
+                    <button>Submit <i class="fa fa-arrow-right"></i></button>
+                </form>
+            </div>                
+        </main>
+    </body>
+</html>

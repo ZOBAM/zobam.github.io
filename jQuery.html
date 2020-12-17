@@ -1,0 +1,41 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="style/materialize.css"  media="screen,projection"/>
+    <script src="js/jquery.min.js"></script>
+    <title>jQuery</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-wrapper">
+              <a href="#" class="brand-logo"><img src="media/images/logo.png" width="90" alt="company logo"></a>
+              <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="sass.html">Sass</a></li>
+                <li id="comp"><a href="badges.html">Components</a></li>
+                <li><a href="collapsible.html">JavaScript</a></li>
+                <li><a href="vjs.html">Vue JS</a></li>
+              </ul>
+            </div>
+        </nav>
+    </header>
+    <h1 class="heading">jQuery Is Loading</h1>
+    <script type="text/javascript" src="js/materialize.js"></script>
+    <script>
+        $('.heading').hide(9000).slideDown(9000);
+        $('img').first().css({transform:'rotate(14deg)',backgroundColor: "white",marginTop: "2rem"});
+        //$('li').css({backgroundColor: "green"});
+        $('li').first().css({border: "2px solid white"});
+        $('nav:first-child li').last().css({fontWeight: "bold"});
+        $('#comp').siblings().css({border:"4px solid white",backgroundColor:"red"})
+        $('li').eq(1).css({border: "2px solid white"});
+
+        $(document).ready(function(){
+          $('<div>').addClass('clear').appendTo($('body'));
+          $$('body').append($('<div>')).addClass('clear');
+        })
+    </script>
+</body>
+</html>
