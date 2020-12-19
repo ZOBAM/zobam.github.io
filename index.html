@@ -1,72 +1,306 @@
-<!Doctype html>
-<html>
-    <head>
-        <title>Layout Practice</title>
-        <!--Import Google Icon Font-->
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <!--Import materialize.css-->
-      <link type="text/css" rel="stylesheet" href="style/materialize.css"  media="screen,projection"/>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toast::Materialize</title>
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="style/materialize.css"  media="screen,projection"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-        <link rel="stylesheet" href="style/style.css">
-    </head>
-    <body>
-        <p>I have the following properties:</p>
-        <ul>
-            <li id="elemID">Lands</li>
-            <li class="elemClass">Houses</li>
-            <li >Cars</li>
-            <li class="anotherClass">Bikes</li>
-        </ul>
-        <div class="animate"> Trying out animation</div>
-        <ol>
-            <li>Lands</li>
-            <li>Houses</li>
-            <li>Cars</li>
-            <li>Bikes</li>
-        </ol>
-        <div>
-            <p>
-                I have been thinking through the whole thing you told me this morning and I'm sad to let you know that I won't be able able to make it. My performance last week on the task and assignments given weren't so good and I was asked to repeat them coupled with the assignments of this week, all to be submitted on Saturday morning. As I face this strenuous training session, I don't want to create any impression that I am not fully committed to it because part of the terms is that I should be fully available always for the duration of the training without having other engagements with which I will give excuses or miss class.
-            </p>
-            <p>
-                Finally, I can't really wait to get to the point of even a little degree of financial ease so that I can really live the life I yearn to live, a live of constant service and work in His vineyard for the expansion of the Kingdom. I feel so bad whenever I have to write you messages like this but for now, it seems I have little or no choice. 
-
-                Please sir, don't forget to pray for me.
-            </p>
-        </div>
-        <canvas id="canvas" width="400" height="300"></canvas>
-        <table>
-            <tr>
-                <th>S/N</th>
-                <th>Name</th>
-                <th>Maths</th>
-                <th>English</th>
-                <th>Total</th>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>Julian</td>
-                <td>60</td>
-                <td>80</td>
-                <td>140</td>
-            </tr>
-        </table>
-        <h1>I am a level one Heading</h1>
-        <script src="js/canvas.js"></script>
-        <script type="text/javascript" src="js/materialize.js"></script>
-        <script>
-            var liEl = document.querySelector('#elemID').style.backgroundColor = "rgb(255,100,100,0.5)";
-            var liEl1 = document.querySelector('.elemClass').style.backgroundColor = "rgb(100,100,255,0.5)";
-            var liEl2 = document.getElementsByTagName('li')[2].style.backgroundColor = "rgb(255,255,10,0.5)";
-            var liEl3 = document.getElementsByClassName('anotherClass')[0].style.backgroundColor = "purple";
-            document.getElementsByTagName('h1')[0].onclick = function(){
-                this.style.backgroundColor = "blue";
-                alert("You clicked a heading element");
+    <style>
+        body{
+            background-color: rgb(35, 145, 235);
+            background-image: url("media/mountains.jpg");
+            background-size: cover;
+        }
+        main{
+        }
+        .rounded{
+            border-radius: 48px;
+            border: 2px groove #f8f8f8c7;
+            background-color: #5555bb;
+            font-weight: bolder;
+            /* border-image: linear-gradient(red, white); */
+        }
+        div.container{
+            background-color: rgb(255, 255, 255);
+            margin: 1rem auto;
+            border: 0px groove rgba(222, 222, 250, 0.74);
+            box-shadow: 2px 2px 4px grey, -2px -2px 4px grey;
+            border-radius: 1rem;
+        }
+        button{
+            margin: 1rem;
+            background-color: #306A92;
+        }
+        li{
+            box-shadow: 2px 2px 4px red;
+        }
+        li:hover{
+            color: rgb(240, 240, 240);
+            box-shadow: 2px 2px 4px red;
+            background-color: rgba(0, 0, 255, 0.63);
+        }
+        @keyframes span_rotate {
+            0%{
+                transform: rotate(90deg);
             }
-            /* document.getElementsByTagName('body')[0].onscroll = function(){
-                //this.style.backgroundColor = "blue";
-                alert();
-            } */
-        </script>
-    </body>
+            25%{
+                transform: rotate(180deg);
+            }
+            50%{
+                transform: rotate(270deg);
+            }
+            75%{
+                transform: rotate(360deg);
+            }
+            100%{
+                transform: rotate(4deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="container" id="container">
+            <div style="display: flex; justify-content: center;">
+                <button onclick="getToast()" class="btn " style="background-color: #306A92;" id="play">
+                    Play Toasts <i class="material-icons">play_arrow</i>
+                </button>
+                <button onclick="pause('pause')" class="btn" id="pause" style="background-color: #306A92;" disabled>
+                    Pause Toasts <i class="material-icons">pause</i>
+                </button>
+            </div>
+            <div id="progress-div" style="height: auto; width: 0%; background-color: #aaaaaa"></div>
+            <div class="row" id="list-container"></div>
+        </div>
+    </main>
+    <script src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/materialize.js"></script>
+    <script>
+        var msgs = [
+            {msg: 'I heard you were coming.', count: 0}, 
+            {msg: 'I was glad to have you around', count: 0}, 
+            {msg: 'Welcome to my world', count: 0}, 
+            {msg: 'You are always a blessing', count: 0},
+            {msg: 'I have a little story for you', count: 0},
+            {msg: 'Have wondered how kind God is', count: 0},
+            {msg: 'When I was thinking of how', count: 0},
+            {msg: 'How he brings people into our lives', count: 0},
+            {msg: 'Just at the right moment', count: 0},
+            {msg: 'Oh, yes I know', count: 0},
+            {msg: 'I know that some did us bad', count: 0},
+            {msg: 'They abused the chance', count: 0},
+            {msg: 'The chance they had with us', count: 0},
+            {msg: 'Maybe something told them a lie', count: 0},
+            {msg: 'A lie that we\' always be around', count: 0},
+            {msg: 'If they knew we are moving', count: 0},
+            {msg: 'Moving constantly to destiny', count: 0},
+            {msg: 'And when done we return home', count: 0},
+            {msg: 'Home to our maker and Lord', count: 0},
+            {msg: 'They would have treated us better', count: 0},
+            {msg: 'Even that does not change the fact,', count: 0},
+            {msg: 'That you are a blessing.', count: 0},
+            {msg: 'That the world is blessed.', count: 0},
+            {msg: 'Blessed just to have you', count: 0},
+            {msg: 'God bless you!', count: 0}
+            ];
+        var bodyEl = $('#list-container');
+        var firstDiv = $("<div>").addClass('col m6');
+        var secondDiv = $("<div>").addClass('col m6');
+        var firstOl = $("<ol>").css({listStyleType:"none"});
+        var secondOl = $("<ol>").css({listStyleType:"none"});
+        var listStyle = {
+            boxShadow:"1px 1px 4px gray",
+            margin:".7rem 0rem",
+            padding:"0px 0px 0px 4px",
+            borderLeft: "4px solid #171605",
+            cursor: "pointer",
+            transition: "background-color,border .5s"
+        };
+        var liNumStyle = {
+            minWidth:"29px",
+            display:"inline-block",
+            color:"white",
+            backgroundColor:"#AA0000",
+            marginRight:"5px",
+            textAlign:"center",
+            padding: "5px",
+        }
+        var countNumStyle = {
+            minWidth:"29px",
+            display:"inline-block",
+            color:"black",
+            backgroundColor:"#A4A4A4",
+            marginRight:"0px",
+            textAlign:"center",
+            padding: "5px",
+            display:"inline-block",
+            float:"right",
+            transform: "rotate(5deg)",
+            transition: "transform 3s 1s"
+        }
+        for(let i = 0; i<msgs.length; i++){
+            if(i <= (msgs.length/2) || false){
+                firstOl.append(
+                    $("<li>").css(listStyle).attr('id',i)
+                        .append($("<span>").css(liNumStyle).text(i+1))
+                        .append($("<span>").text(msgs[i].msg))
+                        .append($("<span>").css(countNumStyle).attr('class',i+" count").text(msgs[i].count))
+                        
+                );
+                firstDiv.append(firstOl);
+            }
+            else{
+                secondOl.append(
+                    $("<li>").css(listStyle).attr('id',i)
+                        .append($("<span>").css(liNumStyle).text(i+1))
+                        .append($("<span>").text(msgs[i].msg))
+                        .append($("<span>").css(countNumStyle).attr('class',i+" count").text(msgs[i].count))
+                );
+                secondDiv.append(secondOl);
+            }
+        }
+        bodyEl.append(firstDiv);
+        bodyEl.append(secondDiv);
+
+    $('li').click(function liClicked(){
+        let toastIndex = $(this).attr('id');
+        M.toast({html: msgs[toastIndex].msg, classes: 'rounded'});
+        //getToast(toastIndex);
+    });
+
+    var stoppedAt = 0;
+    var startedToasting = false;
+    var myInterval;
+    var paused = false;
+    var lastItem = false;
+        function getRandom(low = 0,high = 25){
+            return Math.floor((Math.random() * high) - low);
+        }
+    function getToast(toastIndex = -1){
+        var index = -1;
+        var liElems = $('li');
+        var toastedItems = [];
+        var toastedIndexes = [];
+        var fromClick = false;
+        myInterval = setInterval(showToast,5000);
+        if(Number.isInteger(+toastIndex) && toastIndex > -1){
+            //alert("Calling from a function");
+           //M.toast({html: msgs[toastIndex], classes: 'rounded'}); 
+           //index = (stoppedAt == 0)? 0 : stoppedAt + 1;
+           //index = toastIndex;
+           fromClick = true;
+        }
+        else{
+            if(toastIndex == -1){
+                //alert("Toasting started");
+                startedToasting = true;
+                lastItem = false;
+                disableButton('pause',true);
+                disableButton('play');
+                //$('#pause').removeAttr('disabled');
+            }
+        }
+        
+        function showToast(){
+            if(fromClick){
+                index = toastIndex;
+            }
+            else{
+                index = getRandom(); 
+                if(toastedIndexes.includes(index) == true){
+                    while(toastedIndexes.includes(index)){
+                        index = getRandom();
+                    }
+                }
+            }
+            //console.log(index);
+            M.toast({html: msgs[index].msg, classes: 'rounded'});
+            msgs[index].count++;
+            toastedItems.push(liElems.eq(index));
+            var countSpan = $('.'+index);
+            countSpan.css({backgroundColor:"white", animation: "span_rotate 4s"});
+            toastedIndexes.push(index);
+            console.log(toastedIndexes);
+            //msgs[index].count++;
+            $('.'+index).text(msgs[index].count);
+            //format toasted items
+            for(let i = 0; i<toastedItems.length-1; i++){
+                toastedItems[i].css({
+                    backgroundColor:'#111177',
+                    border: "0px solid white",
+                });
+            }
+            //highlight currently toasted item
+            liElems.eq(index).css({
+                backgroundColor : "#5555bb",
+                color: "white",
+                border : "3px solid #9999ff"
+            });
+
+            //if we are on the last toast item
+            if(toastedIndexes.length == msgs.length){
+                setTimeout(function(){//delay the clearing of the last list item formatting by 1s
+                    liElems.css({border: '0px solid white', backgroundColor: 'white', color : 'black'});
+                },1000);
+                $('.count').css({backgroundColor:"#A4A4A4", animation: "span_rotate 4s"});
+                //clear the list of toasted items and clear interval
+                toastedItems = [];
+                lastItem = true;
+                clearInterval(myInterval); 
+                index = 0;
+                disableButton('pause');
+                disableButton('play',true);
+            }
+
+            if(startedToasting == false || fromClick ==true){clearInterval(myInterval)}
+            if(lastItem == true){
+                //alert("Finished running toast");
+                clearInterval(myInterval);
+            }
+            
+            let progress = Math.ceil(100/msgs.length * toastedIndexes.length);
+            console.log(progress);
+            $('#progress-div').text(progress+"%");
+            $('#progress-div').css({
+                color: "white",
+                width: progress+"%",
+                textAlign:"center",
+                padding:'1em',
+                fontWeight: "bolder",
+                backgroundColor: "#3CFCAC9"
+            });
+      }//end showToast()
+  }//end getToast()
+  
+    function pause(){
+        //alert("Pause clicked");
+        clearInterval(myInterval); 
+        paused = true;
+        disableButton('pause');
+        disableButton('play',true);
+        //return;
+    }
+    function disableButton(btn, enable = false){
+        if(btn == "play"){
+            enable? $('#play').removeAttr('disabled') : $('#play').attr('disabled','true');
+        }
+        else if(btn == "pause"){
+            enable? $('#pause').removeAttr('disabled') : $('#pause').attr('disabled','true');
+        }
+    }
+    
+        /* let randoms = [];
+        while(randoms.length<23){
+            let num = getRandom(0,23);
+            if(!randoms.includes(num)){
+                randoms.push(num);
+            }
+        }
+        alert(randoms); */
+        //return false;
+
+    </script>
+</body>
 </html>
